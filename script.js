@@ -23,10 +23,17 @@ function carregarLivros() {
         checkbox.addEventListener('change', () => {
             livro.lido = checkbox.checked;
         });
+
+        const botao = document.createElement('button');
+        botao.textContent = 'Ver Descrição';
+        botao.addEventListener('click', () => {
+            abrirModal(livro.titulo, livro.descricao);
+        });
         
         livroDiv.appendChild(img);
         livroDiv.appendChild(titulo);
         livroDiv.appendChild(checkbox);
+        livroDiv.appendChild(botao);
         
         container.appendChild(livroDiv);
     });
