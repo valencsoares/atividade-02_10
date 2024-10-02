@@ -39,4 +39,25 @@ function carregarLivros() {
     });
 }
 
+function abrirModal(titulo, descricao) {
+    const modal = document.getElementById('modal');
+    const modalTitulo = document.getElementById('modal-titulo');
+    const modalDescricao = document.getElementById('modal-descricao');
+    const span = document.getElementsByClassName('close')[0];
+
+    modalTitulo.textContent = titulo;
+    modalDescricao.textContent = descricao;
+    modal.style.display = 'block';
+
+    span.onclick = function() {
+        modal.style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+}
+
 document.addEventListener('DOMContentLoaded', carregarLivros);
