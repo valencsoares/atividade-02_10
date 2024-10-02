@@ -9,32 +9,45 @@ function carregarLivros() {
     livros.forEach(livro => {
         const livroDiv = document.createElement('div');
         livroDiv.className = 'livro';
-        
+
         const img = document.createElement('img');
         img.src = livro.imagem;
         img.alt = livro.titulo;
-        
+
         const titulo = document.createElement('h2');
         titulo.textContent = livro.titulo;
-        
+
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
+        checkbox.id = `checkbox-${livro.titulo}`;
         checkbox.checked = livro.lido;
         checkbox.addEventListener('change', () => {
             livro.lido = checkbox.checked;
         });
+
+        const label = document.createElement('label');
+        label.htmlFor = checkbox.id;
+        label.textContent = 'Lido';
 
         const botao = document.createElement('button');
         botao.textContent = 'Ver Descrição';
         botao.addEventListener('click', () => {
             abrirModal(livro.titulo, livro.descricao);
         });
-        
+
         livroDiv.appendChild(img);
         livroDiv.appendChild(titulo);
-        livroDiv.appendChild(checkbox);
+
+        // Agrupando checkbox e label em um elemento <div> para melhor organização
+        const checkboxContainer = document.createElement('div');
+        checkboxContainer.classList.add('checkbox-container');
+        checkboxContainer.appendChild(checkbox);
+        checkboxContainer.appendChild(label);
+
+        livroDiv.appendChild(checkboxContainer);
+
         livroDiv.appendChild(botao);
-        
+
         container.appendChild(livroDiv);
     });
 }
@@ -49,11 +62,11 @@ function abrirModal(titulo, descricao) {
     modalDescricao.textContent = descricao;
     modal.style.display = 'block';
 
-    span.onclick = function() {
+    span.onclick = function () {
         modal.style.display = 'none';
     }
 
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target == modal) {
             modal.style.display = 'none';
         }
